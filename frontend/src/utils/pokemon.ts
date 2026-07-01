@@ -31,15 +31,5 @@ export const heightToMeters = (height: number): string =>
 export const weightToKg = (weight: number): string =>
   (weight / 10).toFixed(1)
 
-export const buildQueryString = (params: Record<string, string | number>): string =>
-  Object.entries(params)
-    .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
-    .join('&')
-
 export const clamp = (value: number, min: number, max: number): number =>
   Math.min(Math.max(value, min), max)
-
-export const pipe =
-  <T>(...fns: ReadonlyArray<(arg: T) => T>) =>
-  (value: T): T =>
-    fns.reduce((acc, fn) => fn(acc), value)

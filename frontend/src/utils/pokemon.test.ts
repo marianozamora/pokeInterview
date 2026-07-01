@@ -4,9 +4,7 @@ import {
   heightToMeters,
   weightToKg,
   getTypeColorClass,
-  buildQueryString,
   clamp,
-  pipe,
   TYPE_COLORS,
 } from './pokemon'
 
@@ -62,17 +60,6 @@ describe('getTypeColorClass', () => {
   })
 })
 
-describe('buildQueryString', () => {
-  it('builds a simple query string', () => {
-    expect(buildQueryString({ offset: 0, limit: 20 })).toBe('offset=0&limit=20')
-  })
-
-  it('encodes special characters', () => {
-    const qs = buildQueryString({ name: 'mr. mime' })
-    expect(qs).toContain('mr.')
-  })
-})
-
 describe('clamp', () => {
   it('returns value when within range', () => {
     expect(clamp(5, 0, 10)).toBe(5)
@@ -87,15 +74,3 @@ describe('clamp', () => {
   })
 })
 
-describe('pipe', () => {
-  it('applies functions left to right', () => {
-    const double = (n: number) => n * 2
-    const addOne = (n: number) => n + 1
-    expect(pipe(double, addOne)(3)).toBe(7)
-  })
-
-  it('works with a single function', () => {
-    const negate = (n: number) => -n
-    expect(pipe(negate)(5)).toBe(-5)
-  })
-})
